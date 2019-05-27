@@ -40,22 +40,33 @@ class BalanceSheet:
         self.inventory += int(input("Input increase (decrease) in inventory:"))
 
 
-# PRINT INITIAL FINANCIAL STATEMENTS
-example_IS = IncomeStatement(0, 0)
-example_BS = BalanceSheet(0, 0)
+# ***** START OF GAME *****
 
-print(example_IS.display())
-print(example_BS.display())
+# INITIALIZE FINANCIAL STATEMENTS WITH 10 INVENTORY
+game_IS = IncomeStatement(0, 0)
+game_BS = BalanceSheet(0, 10)
 
-# EXAMPLE OF A SALE
-example_IS.credit_sales()
-print(example_IS.display())
-example_BS.debit_cash()
-print(example_BS.display())
+# GAME LOGIC
+while True:
+    # DISPLAY CURRENT FINANCIAL STATEMENTS
+    print()
+    print(game_IS.display())
+    print(game_BS.display())
+    print()
 
-# EXAMPLE OF AN EXPENSE RECORDING
-example_IS.debit_expenses()
-print(example_IS.display())
-example_BS.debit_inventory()
-print(example_BS.display())
+    # STOP THE GAME WHEN THE BALANCE SHEET HAS AT LEAST 50 EQUITY
+    if game_BS.equity > 50:
+        print("Congratulations, you have grown equity to {}. You win!".format(game_BS.equity))
+        print("GAME OVER")
+        break
+
+    # CHOOSE A MOVE FROM THE OPTIONS
+    print("Press 1: Increase Cash")
+    move = int(input("What is your move?"))
+
+    if move == 1:
+        game_BS.debit_cash()
+    else:
+        print("You did not select an available option")
+
 
