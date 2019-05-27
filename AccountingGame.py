@@ -1,15 +1,35 @@
-# INITIALIZE INCOME STATEMENT AS A DICTIONARY
 
-income_statement = {'Sales': 0, 'COGS': None, 'Gross Profit': None, 'SG&A': 0, 'Depreciation': 0,
-                    'Pre-Tax Earnings': None, 'Income Taxes': None, 'Earnings': None}
+class IncomeStatement:
+    def __init__(self, sales, expenses):
+        self.sales = sales
+        self.expenses = expenses
+        self.income = sales - expenses
 
-# SET LINE ITEMS TO FORMULAS FROM TOP TO BOTTOM AS THEY APPEAR ON INCOME STATEMENT
+    def display(self):
+        self.income = self.sales - self.expenses
+        return "Sales: {} Expenses: {} || Income: {}".format(self.sales, self.expenses, self.income)
 
-income_statement['COGS'] = income_statement['Sales'] * .60
-income_statement['Gross Profit'] = income_statement['Sales'] - income_statement['COGS']
-income_statement['Pre-Tax Earnings'] = income_statement['Gross Profit'] - income_statement['SG&A'] - \
-                                       income_statement['Depreciation']
-income_statement['Income Taxes'] = income_statement['Pre-Tax Earnings'] * .20
-income_statement['Earnings'] = income_statement['Pre-Tax Earnings'] - income_statement['Income Taxes']
+    def credit_sales(self):
+        self.sales = self.sales + int(input("Input sale amount:"))
 
+    def debit_expenses(self):
+        self.expenses = self.expenses + int(input("Input expense amount:"))
+
+
+class BalanceSheet:
+    def __init__(self, cash, inventory):
+        self.cash = cash
+        self.inventory = inventory
+        self.equity = cash + inventory
+
+    def display(self):
+        self.equity = self.cash + self.inventory
+        return "Cash: {} Inventory: {} || Equity: {}".format(self.cash, self.inventory, self.equity)
+
+
+example_IS = IncomeStatement(0, 0)
+example_BS = BalanceSheet(0, 0)
+
+print(example_IS.display())
+print(example_BS.display())
 
