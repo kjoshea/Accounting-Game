@@ -35,9 +35,13 @@ class BalanceSheet:
     def debit_cash(self):
         self.cash += int(input("Input increase (decrease) in cash:"))
 
-    # RECORD AN INCREASE (DECREASE) INVENTORY
+    # RECORD AN INCREASE IN INVENTORY
     def debit_inventory(self):
-        self.inventory += int(input("Input increase (decrease) in inventory:"))
+        self.inventory += int(input("Input increase in inventory:"))
+
+    # RECORD AN DECREASE IN INVENTORY
+    def credit_inventory(self):
+        self.inventory -= int(input("Input decrease in inventory:"))
 
 
 # ***** START OF GAME *****
@@ -61,11 +65,21 @@ while True:
         break
 
     # CHOOSE A MOVE FROM THE OPTIONS
-    print("Press 1: Increase Cash")
+    print("These are your possible moves")
+    print("-----------------------------")
+    print("Press 1: Record a Sale")
     move = int(input("What is your move?"))
 
+    # DETERMINE YOUR MOVE WILL DO
     if move == 1:
+        print()
+        print("Input the sale amount below")
+        game_IS.credit_sales()
         game_BS.debit_cash()
+        print()
+        print("Input the value of inventory sold.")
+        game_BS.credit_inventory()
+        game_IS.debit_expenses()
     else:
         print("You did not select an available option")
 
