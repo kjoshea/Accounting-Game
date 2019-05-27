@@ -68,19 +68,25 @@ while True:
     print("These are your possible moves")
     print("-----------------------------")
     print("Press 1: Record a Sale")
+    print("Press 2: Purchase Inventory")
     move = int(input("What is your move?"))
 
     # DETERMINE YOUR MOVE WILL DO
     if move == 1:
         print()
-        print("Input the sale amount below")
+        print("Input the sale amount below.")
         game_IS.credit_sales()
         game_BS.debit_cash()
         print()
         print("Input the value of inventory sold.")
         game_BS.credit_inventory()
         game_IS.debit_expenses()
+    elif move == 2:
+        print()
+        print("Input the amount of inventory to purchase.")
+        game_BS.debit_inventory()
+        game_BS.debit_cash()
     else:
-        print("You did not select an available option")
+        print("You did not select an available option.")
 
 
