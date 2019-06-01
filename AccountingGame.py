@@ -31,9 +31,18 @@ class BalanceSheet:
         self.equity = self.cash + self.inventory
         return "Cash: {} Inventory: {} || Equity: {}".format(self.cash, self.inventory, self.equity)
 
-    # RECORD AN INCREASE (DECREASE) IN CASH
+    # RECORD AN INCREASE IN CASH
     def debit_cash(self):
-        self.cash += int(input("Input increase (decrease) in cash:"))
+        self.cash += int(input("Input increase in cash:"))
+
+    # RECORD A DECREASE IN CASH
+    def credit_cash(self):
+        cash_to_decrease = int(input("Input decrease in cash:"))
+        if cash_to_decrease <= game_BS.cash:
+            self.cash -= cash_to_decrease
+        else:
+            print("Amount entered too high. You have {} cash available".format(game_BS.cash))
+            game_BS.credit_cash()
 
     # RECORD AN INCREASE IN INVENTORY
     def debit_inventory(self):
@@ -41,11 +50,11 @@ class BalanceSheet:
 
     # RECORD AN DECREASE IN INVENTORY
     def credit_inventory(self):
-        inventory_to_sell = int(input("Input decrease in inventory:"))
-        if inventory_to_sell <= game_BS.inventory:
-            self.inventory -= inventory_to_sell
+        inventory_to_decrease = int(input("Input decrease in inventory:"))
+        if inventory_to_decrease <= game_BS.inventory:
+            self.inventory -= inventory_to_decrease
         else:
-            print("Amount entered too high. You have {} inventory remaining.".format(game_BS.inventory))
+            print("Amount entered too high. You have {} inventory available.".format(game_BS.inventory))
             game_BS.credit_inventory()
 
 # ***** START OF GAME *****
@@ -57,6 +66,9 @@ game_BS = BalanceSheet(0, 10)
 # GAME LOGIC
 while True:
     # DISPLAY CURRENT FINANCIAL STATEMENTS
+    print("GAME START")
+    print()
+    print("These are your starting financial statements.")
     print()
     print(game_IS.display())
     print(game_BS.display())
@@ -91,8 +103,9 @@ while True:
     elif move == 2:
         print()
         print("Input the amount of inventory to purchase.")
+        game_BS.credit_cash()
         game_BS.debit_inventory()
-        game_BS.debit_cash()
+
     else:
         print("You did not select an available option.")
 
