@@ -41,8 +41,12 @@ class BalanceSheet:
 
     # RECORD AN DECREASE IN INVENTORY
     def credit_inventory(self):
-        self.inventory -= int(input("Input decrease in inventory:"))
-
+        inventory_to_sell = int(input("Input decrease in inventory:"))
+        if inventory_to_sell <= game_BS.inventory:
+            self.inventory -= inventory_to_sell
+        else:
+            print("Amount entered too high. You have {} inventory remaining.".format(game_BS.inventory))
+            game_BS.credit_inventory()
 
 # ***** START OF GAME *****
 
@@ -69,18 +73,21 @@ while True:
     print("-----------------------------")
     print("Press 1: Record a Sale")
     print("Press 2: Purchase Inventory")
-    move = int(input("What is your move?"))
+    move = int(input("What is your move? "))
 
     # DETERMINE YOUR MOVE WILL DO
     if move == 1:
-        print()
-        print("Input the sale amount below.")
-        game_IS.credit_sales()
-        game_BS.debit_cash()
+        print("-----------------------------")
+        print("You have {} inventory available".format(game_BS.inventory))
         print()
         print("Input the value of inventory sold.")
         game_BS.credit_inventory()
         game_IS.debit_expenses()
+        print()
+        print("Input the sale amount below.")
+        game_IS.credit_sales()
+        game_BS.debit_cash()
+
     elif move == 2:
         print()
         print("Input the amount of inventory to purchase.")
