@@ -57,18 +57,24 @@ class BalanceSheet:
             print("Amount entered too high. You have {} inventory available.".format(game_BS.inventory))
             game_BS.credit_inventory()
 
+
 # ***** START OF GAME *****
 
 # INITIALIZE FINANCIAL STATEMENTS WITH 10 INVENTORY
 game_IS = IncomeStatement(0, 0)
 game_BS = BalanceSheet(0, 10)
 
+# INITIALIZE MOVE COUNTER
+move_counter = 0
+
+# ANNOUNCE GAME START
+print("GAME START")
+print()
+print("These are your starting financial statements.")
+
 # GAME LOGIC
 while True:
     # DISPLAY CURRENT FINANCIAL STATEMENTS
-    print("GAME START")
-    print()
-    print("These are your starting financial statements.")
     print()
     print(game_IS.display())
     print(game_BS.display())
@@ -76,7 +82,8 @@ while True:
 
     # STOP THE GAME WHEN THE BALANCE SHEET HAS AT LEAST 50 EQUITY
     if game_BS.equity > 50:
-        print("Congratulations, you have grown equity to {}. You win!".format(game_BS.equity))
+        print("Congratulations, you have grown equity to {} in {} {}. You win!".format(game_BS.equity,move_counter,
+              "move" if move_counter == 1 else "moves"))
         print("GAME OVER")
         break
 
@@ -109,4 +116,6 @@ while True:
     else:
         print("You did not select an available option.")
 
+    # INCREASE MOVE COUNTER
+    move_counter += 1
 
