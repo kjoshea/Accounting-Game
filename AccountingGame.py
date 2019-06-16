@@ -8,7 +8,7 @@ class IncomeStatement:
     # DISPLAY THE CURRENT INCOME STATEMENT
     def display(self):
         self.income = self.sales - self.expenses
-        return "Sales: {} Expenses: {} || Income: {}".format(self.sales, self.expenses, self.income)
+        print("Sales: {} Expenses: {} || Income: {}".format(self.sales, self.expenses, self.income))
 
     # RECORD A SALE
     def credit_sales(self):
@@ -29,7 +29,7 @@ class BalanceSheet:
     # DISPLAY THE CURRENT BALANCE SHEET
     def display(self):
         self.equity = self.cash + self.inventory
-        return "Cash: {} Inventory: {} || Equity: {}".format(self.cash, self.inventory, self.equity)
+        print("Cash: {} Inventory: {} || Equity: {}".format(self.cash, self.inventory, self.equity))
 
     # RECORD AN INCREASE IN CASH
     def debit_cash(self):
@@ -76,8 +76,8 @@ print("These are your starting financial statements.")
 while True:
     # DISPLAY CURRENT FINANCIAL STATEMENTS
     print()
-    print(game_IS.display())
-    print(game_BS.display())
+    game_IS.display()
+    game_BS.display()
     print()
 
     # STOP THE GAME WHEN THE BALANCE SHEET HAS AT LEAST 50 EQUITY
